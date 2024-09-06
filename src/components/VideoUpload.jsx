@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Button, Label, TextInput, Textarea } from "flowbite-react";
+import axios from "axios";
 
 function VideoUpload() {
 
@@ -26,6 +27,37 @@ function VideoUpload() {
 
     function handleForm(formEvent) {
         formEvent.preventDefault();
+        if (!selectedFile) {
+            alert("Must Select Video File !");
+            return;
+        }
+        // save data into server
+        submitToServer(selectedFile, meta);
+    }
+
+    async function submitToServer(video, videoMeta) {
+        setUploading(true);
+
+        //Calling API
+        try {
+            let formData = new FormData();
+            formData.append("file", video);
+            formData.append("title", videoMeta.title);
+            formData.append("desc", videoMeta.desc);
+
+            let response = await axios.post(`http://localhost:8080/api/v1/videos`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                onDownloadProgress: (progressEvent) => {
+                    console.log(progressEvent);
+                }
+            });
+
+            console.log(response);
+            setMessage("File uploaded Successfully !")
+
+        } catch (error) { console.error(error) }
     }
 
     return (
