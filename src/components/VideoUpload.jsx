@@ -27,6 +27,18 @@ function VideoUpload() {
         });
     }
 
+    function resetForm() {
+
+        setMeta({
+            title: '',
+            desc: ''
+        });
+
+        setUploading(false);
+        setProgress(0);
+        setSelectedFile(null);
+    }
+
     function handleForm(formEvent) {
         formEvent.preventDefault();
         if (!selectedFile) {
@@ -54,19 +66,16 @@ function VideoUpload() {
                 onUploadProgress: (progressEvent) => {
                     const prgs = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                     setProgress(prgs);
-                    console.log(prgs);
                 }
             });
 
-            console.log(response);
-            setProgress(0);
-            setUploading(false);
+            resetForm();
             setMessage("File Uploaded Successfully !");
             toast.success("Hurrey! File Uploading Done")
+            console.log(response.data);
 
         } catch (error) {
-            setProgress(0);
-            setUploading(false);
+            resetForm();
             setMessage("Oops... Uploading Failed!");
             toast.error("Bad Luck!")
             console.error(error);
@@ -81,14 +90,14 @@ function VideoUpload() {
                 <h1 className="text-2xl text-lime-400 text-center font-semibold py-3">Hey! Upload Your Videos Here... </h1>
 
                 <div>
-                    <form noValidate onSubmit={handleForm} className="flex flex-col space-y-9">
+                    <form onSubmit={handleForm} className="flex flex-col space-y-9">
 
                         <div>
-                            <TextInput name="title" onChange={handleField} placeholder="Enter Title For Video" required></TextInput>
+                            <TextInput name="title" value={meta.title} onChange={handleField} placeholder="Enter Title For Video" required></TextInput>
                         </div>
 
                         <div>
-                            <Textarea name="desc" onChange={handleField} placeholder="Write Description" required rows={3}>
+                            <Textarea name="desc" value={meta.desc} onChange={handleField} placeholder="Write Description" required rows={3}>
 
                             </Textarea>
                         </div>
