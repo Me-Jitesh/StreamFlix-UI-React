@@ -49,7 +49,7 @@ function VideoUpload() {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
-                onDownloadProgress: (progressEvent) => {
+                onUploadProgress: (progressEvent) => {
                     const prgs = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                     setProgress(prgs);
                     console.log(prgs);
