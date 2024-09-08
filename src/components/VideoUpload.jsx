@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Card, Button, Label, TextInput, Textarea, Progress, Alert } from "flowbite-react";
+import { Card, Button, Label, TextInput, Textarea, Progress, Alert, Toast, ToastToggle } from "flowbite-react";
 import axios from "axios";
+import toast from 'react-hot-toast';
+
 
 function VideoUpload() {
 
@@ -60,11 +62,13 @@ function VideoUpload() {
             setProgress(0);
             setUploading(false);
             setMessage("File Uploaded Successfully !");
+            toast.success("Hurrey! File Uploading Done")
 
         } catch (error) {
             setProgress(0);
             setUploading(false);
             setMessage("Oops... Uploading Failed!");
+            toast.error("Bad Luck!")
             console.error(error);
         }
     }
