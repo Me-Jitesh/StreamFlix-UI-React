@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Label, TextInput, Textarea, Progress, Alert, Toast, ToastToggle } from "flowbite-react";
+import { Card, Button, HR, TextInput, Textarea, Progress, Alert } from "flowbite-react";
 import axios from "axios";
 import toast from 'react-hot-toast';
 
@@ -85,10 +85,9 @@ function VideoUpload() {
     return (
         <div className="text-slate-100">
 
-            <Card className="flex flex-col">
-
-                <h1 className="text-2xl text-lime-400 text-center font-semibold py-3">Hey! Upload Your Videos Here... </h1>
-
+            <Card className="flex" imgSrc="https://cdn.pixabay.com/photo/2023/02/15/20/01/ai-generated-7792597_1280.jpg" horizontal>
+                <h1 className="text-3xl text-gray-400 text-center font-semibold p-3 bg-slate-900 rounded">Stream Your Moments 😍🤩 </h1>
+                <hr />
                 <div>
                     <form onSubmit={handleForm} className="flex flex-col space-y-9">
 

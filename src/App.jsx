@@ -6,9 +6,9 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   return (
     <>
-      <div className='flex justify-center py-9 bg-blue-200'>
-        <h1 className='font-bold text-6xl text-zinc-600'>
-          Welcome To <span className='text-slate-900'>Stream</span><span className='text-red-800'>Flix</span>
+      <div className='flex justify-center py-8 bg-indigo-400'>
+        <h1 className='font-bold text-6xl  text-center text-zinc-800'>
+          Welcome To <span className='text-violet-950'>Stream</span><span className='text-orange-500'>Flix</span>
         </h1>
       </div>
 
