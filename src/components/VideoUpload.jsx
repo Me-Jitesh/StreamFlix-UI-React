@@ -106,26 +106,25 @@ function VideoUpload() {
                             </label>
                         </div>
 
-                        <div>
-                            {uploading &&
-                                <Progress
-                                    progress={progress}
-                                    textLabel="Uploading..."
-                                    size="lg"
-                                    color="green"
-                                    labelProgress
-                                    labelText
-                                />}
-                        </div>
+                        {uploading &&
+                            <Progress
+                                progress={progress}
+                                textLabel="Uploading..."
+                                size="lg"
+                                color="green"
+                                labelProgress
+                                labelText
+                            />
+                        }
 
                         <div className="flex justify-center my-3">
                             <Button type="submit" disabled={uploading} gradientDuoTone="tealToLime" size="md" className="px-6" pill>Upload</Button>
                         </div>
                     </form>
                 </div>
-            </Card>
+            </Card >
 
-        </div>
+        </div >
     )
 }
 
