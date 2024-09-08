@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Label, TextInput, Textarea } from "flowbite-react";
+import { Card, Button, Label, TextInput, Textarea, Progress, Alert } from "flowbite-react";
 import axios from "axios";
 
 function VideoUpload() {
@@ -50,14 +50,23 @@ function VideoUpload() {
                     'Content-Type': 'multipart/form-data'
                 },
                 onDownloadProgress: (progressEvent) => {
-                    console.log(progressEvent);
+                    const prgs = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                    setProgress(prgs);
+                    console.log(prgs);
                 }
             });
 
             console.log(response);
-            setMessage("File uploaded Successfully !")
+            setProgress(0);
+            setUploading(false);
+            setMessage("File Uploaded Successfully !");
 
-        } catch (error) { console.error(error) }
+        } catch (error) {
+            setProgress(0);
+            setUploading(false);
+            setMessage("Oops... Uploading Failed!");
+            console.error(error);
+        }
     }
 
     return (
@@ -88,17 +97,29 @@ function VideoUpload() {
                                 <span className="sr-only">Upload Video</span>
                                 <input type="file" name="file" onChange={handleFileChange} required
                                     className="block w-full text-sm text-slate-500
-                        file:mr-4 file:py-2 file:px-4
-                        file:rounded-full file:border-0
-                        file:text-sm file:font-semibold
-                        file:bg-violet-50 file:text-violet-700
-                        hover:file:bg-violet-100"
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-violet-50 file:text-violet-700
+                                    hover:file:bg-violet-100"
                                 />
                             </label>
                         </div>
 
+                        <div>
+                            {uploading &&
+                                <Progress
+                                    progress={progress}
+                                    textLabel="Uploading..."
+                                    size="lg"
+                                    color="green"
+                                    labelProgress
+                                    labelText
+                                />}
+                        </div>
+
                         <div className="flex justify-center my-3">
-                            <Button type="submit" gradientDuoTone="tealToLime" size="md" className="px-6" pill>Upload</Button>
+                            <Button type="submit" disabled={uploading} gradientDuoTone="tealToLime" size="md" className="px-6" pill>Upload</Button>
                         </div>
                     </form>
                 </div>
