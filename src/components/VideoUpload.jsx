@@ -143,8 +143,9 @@ function VideoUpload() {
                 </div>
             </Card >
 
-            <Card className="my-6">
-                <video width={'300px'}
+            <Card className="my-6 items-center">
+                <video width="300px"
+                    poster="https://cdn.pixabay.com/photo/2021/02/16/18/55/gamer-6022003_1280.png"
                     src={`http://localhost:8080/api/v1/videos/stream/range/${vidId}`}
                     controls
                 />
