@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, HR, TextInput, Textarea, Progress, Alert } from "flowbite-react";
+import { Card, Button, TextInput, Textarea, Progress, Alert } from "flowbite-react";
 import axios from "axios";
 import toast from 'react-hot-toast';
 
@@ -15,6 +15,7 @@ function VideoUpload() {
     const [progress, setProgress] = useState(0);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
+    const [vidId, setVidId] = useState("e41a1a7a-019a-422c-9fc2-d9b8e407a8a6")
 
     function handleFileChange(event) {
         setSelectedFile(event.target.files[0]);
@@ -141,6 +142,13 @@ function VideoUpload() {
                     </form>
                 </div>
             </Card >
+
+            <Card className="my-6">
+                <video width={'200px'}
+                    src={`http://localhost:8080/api/v1/videos/stream/${vidId}`}
+                    controls
+                />
+            </Card>
 
         </div >
     )
