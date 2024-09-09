@@ -15,7 +15,7 @@ function VideoUpload() {
     const [progress, setProgress] = useState(0);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
-    const [vidId, setVidId] = useState("e41a1a7a-019a-422c-9fc2-d9b8e407a8a6")
+    const [vidId, setVidId] = useState("b92ed892-4635-461c-b841-e72ae17ffd2b")
 
     function handleFileChange(event) {
         setSelectedFile(event.target.files[0]);
@@ -144,8 +144,8 @@ function VideoUpload() {
             </Card >
 
             <Card className="my-6">
-                <video width={'200px'}
-                    src={`http://localhost:8080/api/v1/videos/stream/${vidId}`}
+                <video width={'300px'}
+                    src={`http://localhost:8080/api/v1/videos/stream/range/${vidId}`}
                     controls
                 />
             </Card>
