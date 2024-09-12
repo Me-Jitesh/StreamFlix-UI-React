@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, Button, TextInput, Textarea, Progress, Alert } from "flowbite-react";
 import axios from "axios";
 import toast from 'react-hot-toast';
+import VideoPlayer from "./VideoPlayer";
 
 
 function VideoUpload() {
@@ -15,7 +16,7 @@ function VideoUpload() {
     const [progress, setProgress] = useState(0);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
-    const [vidId, setVidId] = useState("b92ed892-4635-461c-b841-e72ae17ffd2b")
+    const [vidId, setVidId] = useState("a43eb0d-7e97-4234-a886-63acc28c076e");
 
     function handleFileChange(event) {
         setSelectedFile(event.target.files[0]);
@@ -60,7 +61,7 @@ function VideoUpload() {
             formData.append("title", videoMeta.title);
             formData.append("desc", videoMeta.desc);
 
-            let response = await axios.post(`http://localhost:8080/api/v1/videos`, formData, {
+            let response = await axios.post(`https://fair-ivory-bitinsights-18ecfbdf.koyeb.app/api/v1/videos`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -144,14 +145,18 @@ function VideoUpload() {
             </Card >
 
             <Card className="my-6 items-center">
-                <video width="300px"
-                    poster="https://cdn.pixabay.com/photo/2021/02/16/18/55/gamer-6022003_1280.png"
-                    src={`http://localhost:8080/api/v1/videos/stream/range/${vidId}`}
-                    controls
-                />
-            </Card>
 
-        </div >
+                {/* <video width="300px"
+                    poster="https://cdn.pixabay.com/photo/2021/02/16/18/55/gamer-6022003_1280.png"
+                    src={`http://localhost:8080/api/v1/videos/stream/${vidId}/master.m3u8`}
+                    controls
+                /> */}
+
+                <VideoPlayer src={`https://fair-ivory-bitinsights-18ecfbdf.koyeb.app/api/v1/videos/stream/${vidId}/master.m3u8`}
+                    poster={`https://cdn.pixabay.com/photo/2021/02/16/18/55/gamer-6022003_1280.png`}>
+                </VideoPlayer>
+            </Card>
+        </div>
     )
 }
 
