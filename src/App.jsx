@@ -13,7 +13,7 @@ function App() {
       </div>
 
 
-      <div className="flex flex-col items-center justify-center space-y-5 py-6">
+      <div className="flex flex-col items-center justify-center space-y-2 py-6">
         <Toaster />
         <VideoUpload />
       </div>

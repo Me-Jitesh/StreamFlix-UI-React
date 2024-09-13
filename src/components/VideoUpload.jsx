@@ -8,6 +8,7 @@ import VideoPlayer from "./VideoPlayer";
 function VideoUpload() {
 
     const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedImg, setSelectedImg] = useState(null);
     const [meta, setMeta] = useState({
         title: "",
         desc: ""
@@ -16,10 +17,14 @@ function VideoUpload() {
     const [progress, setProgress] = useState(0);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
-    const [vidId, setVidId] = useState("a43eb0d-7e97-4234-a886-63acc28c076e");
+    const [vidId, setVidId] = useState("694543b0-7a1b-4bb5-9d2d-59c0624b0a2c");
 
     function handleFileChange(event) {
         setSelectedFile(event.target.files[0]);
+    }
+
+    function handleImgChange(event) {
+        setSelectedImg(event.target.files[0]);
     }
 
     function handleField(event) {
@@ -39,29 +44,31 @@ function VideoUpload() {
         setUploading(false);
         setProgress(0);
         setSelectedFile(null);
+        setSelectedImg(null);
     }
 
     function handleForm(formEvent) {
         formEvent.preventDefault();
-        if (!selectedFile) {
+        if (!selectedFile | !selectedImg) {
             alert("Must Select Video File !");
             return;
         }
         // save data into server
-        submitToServer(selectedFile, meta);
+        submitToServer(selectedFile, selectedImg, meta);
     }
 
-    async function submitToServer(video, videoMeta) {
+    async function submitToServer(video, image, videoMeta) {
         setUploading(true);
 
         //Calling API
         try {
             let formData = new FormData();
             formData.append("file", video);
+            formData.append("thumb", image);
             formData.append("title", videoMeta.title);
             formData.append("desc", videoMeta.desc);
 
-            let response = await axios.post(`https://fair-ivory-bitinsights-18ecfbdf.koyeb.app/api/v1/videos`, formData, {
+            let response = await axios.post(`https://streamflix-unhp.onrender.com/api/v1/videos`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -91,7 +98,7 @@ function VideoUpload() {
                 <h1 className="text-3xl text-gray-400 text-center font-semibold p-3 bg-slate-900 rounded">Stream Your Moments 😍🤩 </h1>
                 <hr />
                 <div>
-                    <form onSubmit={handleForm} className="flex flex-col space-y-9">
+                    <form onSubmit={handleForm} className="flex flex-col space-y-3">
 
                         <div>
                             <TextInput name="title" value={meta.title} onChange={handleField} placeholder="Enter Title For Video" required></TextInput>
@@ -104,12 +111,30 @@ function VideoUpload() {
                         </div>
                         <div className="flex items-center space-x-2">
                             <div className="shrink-0">
-                                <img className="h-16 w-16 object-cover rounded-s-full" src="https://plus.unsplash.com/premium_photo-1710961233810-5350d81d4b20?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="icon" />
+                                <img className="h-16 w-16 object-cover rounded-s-full" src="https://plus.unsplash.com/premium_photo-1710961233810-5350d81d4b20" alt="icon" />
                             </div>
 
                             <label className="block">
                                 <span className="sr-only">Upload Video</span>
                                 <input type="file" name="file" onChange={handleFileChange} required
+                                    className="block w-full text-sm text-slate-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-violet-50 file:text-violet-700
+                                    hover:file:bg-violet-100"
+                                />
+                            </label>
+                        </div>
+
+                        <div className="flex items-center space-x-2">
+                            <div className="shrink-0">
+                                <img className="h-16 w-16 object-cover rounded-s-full" src="https://plus.unsplash.com/premium_vector-1710344022594-ae662522105c" alt="icon" />
+                            </div>
+
+                            <label className="block">
+                                <span className="sr-only">Upload Thumbnail</span>
+                                <input type="file" name="thumb" onChange={handleImgChange} required
                                     className="block w-full text-sm text-slate-500
                                     file:mr-4 file:py-2 file:px-4
                                     file:rounded-full file:border-0
@@ -152,8 +177,8 @@ function VideoUpload() {
                     controls
                 /> */}
 
-                <VideoPlayer src={`https://fair-ivory-bitinsights-18ecfbdf.koyeb.app/api/v1/videos/stream/${vidId}/master.m3u8`}
-                    poster={`https://cdn.pixabay.com/photo/2021/02/16/18/55/gamer-6022003_1280.png`}>
+                <VideoPlayer src={`https://streamflix-unhp.onrender.com/api/v1/videos/stream/${vidId}/master.m3u8`}
+                    poster={`https://streamflix-unhp.onrender.com/api/v1/videos/stream/thumb/${vidId}`}>
                 </VideoPlayer>
             </Card>
         </div>
