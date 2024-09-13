@@ -1,6 +1,7 @@
 import './App.css'
 import VideoUpload from './components/VideoUpload'
 import { Toaster } from 'react-hot-toast';
+import HomeFeed from './components/HomeFeed';
 
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
       <div className="flex flex-col items-center justify-center space-y-2 py-6">
         <Toaster />
         <VideoUpload />
+      </div>
+      
+      <div className="flex flex-col items-center justify-center space-y-2 py-6">
+        <HomeFeed />
       </div>
 
     </>

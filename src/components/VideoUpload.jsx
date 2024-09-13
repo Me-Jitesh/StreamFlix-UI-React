@@ -68,7 +68,7 @@ function VideoUpload() {
             formData.append("title", videoMeta.title);
             formData.append("desc", videoMeta.desc);
 
-            let response = await axios.post(`https://streamflix-unhp.onrender.com/api/v1/videos`, formData, {
+            let response = await axios.post(`https://streamflix.koyeb.app/api/v1/videos`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -169,18 +169,18 @@ function VideoUpload() {
                 </div>
             </Card >
 
-            <Card className="my-6 items-center">
+            {/* <Card className="my-6 items-center">
 
-                {/* <video width="300px"
+                <video width="300px"
                     poster="https://cdn.pixabay.com/photo/2021/02/16/18/55/gamer-6022003_1280.png"
                     src={`http://localhost:8080/api/v1/videos/stream/${vidId}/master.m3u8`}
                     controls
-                /> */}
+                />
 
                 <VideoPlayer src={`https://streamflix-unhp.onrender.com/api/v1/videos/stream/${vidId}/master.m3u8`}
                     poster={`https://streamflix-unhp.onrender.com/api/v1/videos/stream/thumb/${vidId}`}>
                 </VideoPlayer>
-            </Card>
+            </Card> */}
         </div>
     )
 }
