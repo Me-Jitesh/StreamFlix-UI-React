@@ -94,7 +94,7 @@ function VideoUpload() {
     return (
         <div className="text-slate-100">
 
-            <Card className="flex" imgSrc="https://cdn.pixabay.com/photo/2023/02/15/20/01/ai-generated-7792597_1280.jpg" horizontal>
+            <Card className="flex" imgSrc="https://cdn.pixabay.com/photo/2024/03/18/10/51/ai-generated-8640900_960_720.jpg" horizontal>
                 <h1 className="text-3xl text-gray-400 text-center font-semibold p-3 bg-slate-900 rounded">Stream Your Moments 😍🤩 </h1>
                 <hr />
                 <div>
@@ -163,7 +163,7 @@ function VideoUpload() {
                         }
 
                         <div className="flex justify-center my-3">
-                            <Button type="submit" disabled={uploading} gradientDuoTone="tealToLime" size="md" className="px-6" pill>Upload</Button>
+                            <Button type="submit" disabled={uploading} gradientDuoTone="purpleToPink" size="md" className="px-6" outline pill>Upload</Button>
                         </div>
                     </form>
                 </div>

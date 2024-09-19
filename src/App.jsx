@@ -1,30 +1,43 @@
-import './App.css'
-import {Toaster} from 'react-hot-toast';
-import VideoUpload from './components/VideoUpload'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import VideoUpload from './components/VideoUpload';
 import HomeFeed from './components/HomeFeed';
-
+import { Toaster } from 'react-hot-toast';
+import { Button } from 'flowbite-react';
 function App() {
     return (
-        <>
-            <div className='flex justify-center py-8 bg-indigo-400'>
-                <h1 className='font-bold text-6xl  text-center text-zinc-800'>
-                    Welcome To <span className='text-violet-950'>Stream</span><span
-                    className='text-orange-500'>Flix</span>
-                </h1>
+        <Router>
+            <div className='app'>
+                <Toaster />
+                <nav className='flex justify-between px-6 py-12'>
+                    <h1 className='font-black text-4xl text-gray-500'>
+                        Stream<span className='text-orange-500'>Flix</span>
+                    </h1>
+                    <div className='flex space-x-4'>
+                        <Link className='text-white' to='/'>
+                            <Button gradientDuoTone="purpleToBlue" outline pill >
+                                Video Upload
+                            </Button>
+                        </Link>
+                        <Link className='text-white' to='/feed'>
+                            <Button gradientDuoTone="redToYellow" outline pill>
+                                Watch Videos
+                            </Button>
+                        </Link>
+                    </div>
+                </nav>
+                <div className="flex flex-col items-center justify-center space-y-2 py-6">
+
+                    <Routes>
+                        {/* Route for VideoUpload (Landing Page) */}
+                        <Route path='/' element={<VideoUpload />} />
+                        {/* Route for Feed */}
+                        <Route path='/feed' element={<HomeFeed />} />
+                    </Routes>
+                </div>
             </div>
-
-
-            <div className="flex flex-col items-center justify-center space-y-2 py-6">
-                <Toaster/>
-                <VideoUpload/>
-            </div>
-
-            <div className="flex flex-col items-center justify-center space-y-2 py-6">
-                <HomeFeed/>
-            </div>
-
-        </>
-    )
+        </Router>
+    );
 }
 
-export default App
+export default App;

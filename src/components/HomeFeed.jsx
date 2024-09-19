@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Spinner } from 'flowbite-react';
+import { Button, Spinner } from 'flowbite-react';
 import '../App.css';
 import VideoPlayer from './VideoPlayer';
 
@@ -58,21 +58,24 @@ function HomeFeed() {
 
 function VideoCard({ video, onDelete }) {
     return (
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md">
+        <div className="max-w-sm bg-slate-950 border border-gray-500 rounded-md shadow-md">
             <VideoPlayer src={`https://streamflix.koyeb.app/api/v1/videos/stream/${video.videoId}/master.m3u8`}
                 poster={`https://streamflix.koyeb.app/api/v1/videos/stream/thumb/${video.videoId}`}>
             </VideoPlayer>
 
             {/* <img src={`https://streamflix.koyeb.app/api/v1/videos/stream/thumb/${video.videoId}`} alt={video.title} className="rounded-t-lg w-full h-48 object-cover" /> */}
             <div className="p-5">
-                <h5 className="text-2xl font-semibold tracking-tight text-gray-900">{video.title}</h5>
-                <p className="text-gray-800 text-sm mt-2">{video.description}</p>
-                <button
+                <h5 className="text-2xl font-semibold tracking-tight text-slate-600"> {video.title}</h5>
+                <p className="text-slate-300 text-sm mt-2">  &#x22B9; {video.description}</p>
+                <Button
                     onClick={onDelete}
-                    className="mt-4 text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-sm text-sm px-4 py-2"
+                    size='md'
+                    gradientDuoTone="tealToLime"
+                    className='my-4'
+                    outline pill
                 >
                     Delete
-                </button>
+                </Button>
             </div>
         </div>
     );
