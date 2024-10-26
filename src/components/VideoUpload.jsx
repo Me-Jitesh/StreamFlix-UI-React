@@ -68,7 +68,7 @@ function VideoUpload() {
             formData.append("title", videoMeta.title);
             formData.append("desc", videoMeta.desc);
 
-            let response = await axios.post(`https://streamflix.koyeb.app/api/v1/videos`, formData, {
+            let response = await axios.post(`https://streamflix-unhp.onrender.com/api/v1/videos`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

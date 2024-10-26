@@ -11,7 +11,7 @@ function HomeFeed() {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await fetch('https://streamflix.koyeb.app/api/v1/videos/stream');
+                const response = await fetch('https://streamflix-unhp.onrender.com/api/v1/videos/stream');
                 const data = await response.json();
                 console.log(data)
                 setVideos(data);
@@ -27,7 +27,7 @@ function HomeFeed() {
 
     const handleDelete = async (id) => {
         try {
-            await fetch(`https://streamflix.koyeb.app/api/v1/videos/stream/delete/${id}`, {
+            await fetch(`https://streamflix-unhp.onrender.com/api/v1/videos/stream/delete/${id}`, {
                 method: 'GET',
             });
             setVideos(videos.filter((video) => video.videoId !== id));
@@ -59,8 +59,8 @@ function HomeFeed() {
 function VideoCard({ video, onDelete }) {
     return (
         <div className="max-w-sm bg-slate-950 border border-gray-500 rounded-md shadow-md">
-            <VideoPlayer src={`https://streamflix.koyeb.app/api/v1/videos/stream/${video.videoId}/master.m3u8`}
-                poster={`https://streamflix.koyeb.app/api/v1/videos/stream/thumb/${video.videoId}`}>
+            <VideoPlayer src={`https://streamflix-unhp.onrender.com/api/v1/videos/stream/${video.videoId}/master.m3u8`}
+                poster={`https://streamflix-unhp.onrender.com/api/v1/videos/stream/thumb/${video.videoId}`}>
             </VideoPlayer>
 
             {/* <img src={`https://streamflix.koyeb.app/api/v1/videos/stream/thumb/${video.videoId}`} alt={video.title} className="rounded-t-lg w-full h-48 object-cover" /> */}
